@@ -1,0 +1,9 @@
+_region_.log
+_region_.tex
+auto/
+*.aux
+*.log
+*.pdf
+*.prv/
+*.fmt
+*.log

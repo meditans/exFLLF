@@ -1,0 +1,198 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+
+\usepackage{stmaryrd}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bussproofs}
+
+% Questo per mettere il font Palatino
+\renewcommand*\rmdefault{ppl}
+
+\begin{document}
+\title{Fondamenti Logici di Linguaggi Funzionali \\ \small{Anno accademico 2013/2014 \\ Esercizi del corso}}
+\author{Carlo Nucera}
+
+\maketitle
+
+\section*{Esercizio 1}
+\paragraph{Testo}
+Capire quali funzioni si possono costruire rinunciando al minimo o ad altri costruttori.
+
+\section*{Esercizio 2}
+\paragraph{Testo}
+Mostrare che non si può definire la somma senza ricorsione e minimo.
+
+\section*{Esercizio 3}
+\paragraph{Testo}
+Si scrivano il prodotto e l’elevamento a potenza utilizzando $Z^1$, $S^1$, $P^n_i$, $C$, $R$, e si scrivano la differenza e la divisione utilizzando $Z^1$, $S^1$, $P^n_i$, $C$, $R$, $M$.
+
+\section*{Esercizio 4}
+\paragraph{Testo}
+Mostrare che la funzione di Ackermann non è ricorsiva primitiva.
+
+\section*{Esercizio 5}
+\paragraph{Testo}
+Produttività per $n=5$.
+
+\section*{Esercizio 6}
+\paragraph{Testo}
+Dimostrare che utilizzando la $\eta$-uguaglianza $\lambda x.M(x) = M$ , con $x \in FV(M)$, si può dedurre $M(x) = L(x) \Rightarrow M = L$ se $x \notin F V (M ) \cup F V (L)$.
+
+\section*{Esercizio 7}
+\paragraph{Testo}
+Mostrare che i due modi per definire la chiusura riflessiva e transitiva sono equivalenti.
+
+\section*{Esercizio 8}
+\paragraph{Testo}
+Rivedere il Teorema di Tarski per trovare un massimo punto fisso.
+
+\section*{Esercizio 9}
+\paragraph{Testo}
+Mostrare che se $x = y$ e $x \in FV(L)$ allora $M [x := N ][y := L] = M [y := L][x :=N [y := L]]$.
+
+\section*{Esercizio 10}
+\paragraph{Testo}
+Dimostrare il seguente lemma per induzione sulla complessità di $M$: Se $M \rightarrow_1 \overline{M}$ e $N \rightarrow_1 \overline{N}$ allora $M [x := N] \rightarrow_1 \overline{M} [x := \overline{N}]$.
+
+\section*{Esercizio 11}
+\paragraph{Testo}
+Dimostrare la proprietà del diamante per $\rightarrow_1$ per induzione sulla complessità del termine.
+
+\section*{Esercizio 12}
+\paragraph{Testo}
+Cosa succede al teorema di rappresentabilità se passo da $\Lambda$ a $\Lambda^\rightarrow$? Quali funzioni calcolabili sono compilabili con la macchina $\Lambda^\rightarrow$?
+
+\section*{Esercizio 13}
+\paragraph{Testo}
+Dimostrare che qualunque funzione totale da $Boole^n \rightarrow Boole$ può essere scritta usando solo IfThenElse.
+
+\section*{Esercizio 14}
+\paragraph{Testo}
+Fornire l’algoritmo che, dato un $\lambda$-termine in $\Lambda^\rightarrow$, fornisca tipo e contesto validi e si blocchi quando ciò non è possibile. $? \vdash M :\: ?$.
+
+\section*{Esercizio 15}
+\paragraph{Testo}
+Fornire l’algoritmo che, dati contesto e tipo, fornisca un $\lambda$-termine valido e si blocchi quando ciò non è possibile. $\Gamma \vdash \: ? : \alpha$.
+
+\section*{Esercizio 16}
+\paragraph{Testo}
+Compila $(\lambda x.\lambda y. x+y)(1)(1)$ e verifica che è uguale a due.
+
+\section*{Esercizio 17}
+\paragraph{Testo}
+Dimostrare che unione arbitraria di saturi è un saturo e intersezione arbitraria di saturi è un saturo.
+
+\section*{Esercizio 18}
+\paragraph{Testo}
+Dimostrare tutto ciò che serve per il teorema di validità per il tipo delle coppie.
+
+\section*{Esercizio 19}
+\paragraph{Testo}
+Dimostrare che se $X \subseteq F N$ allora esiste un minimo insieme saturo $S$ tale che $X \subseteq S$.
+
+\section*{Esercizio 20}
+\paragraph{Testo}
+Mostrare che in $\llbracket \alpha \times \beta \rrbracket^{MIN} \subseteq \llbracket \alpha \times \beta \rrbracket^{MAX}$ l’inclusione è stretta, anzi che esiste un saturo $S$ tale che $\llbracket \alpha \times \beta \rrbracket^{MIN} \subset S \subset \llbracket \alpha \times \beta \rrbracket^{MAX}$.
+
+\section*{Esercizio 21}
+\paragraph{Testo}
+Estendere il Teorema di Church-Rosser da $\Lambda^\rightarrow$ a $\Lambda^{\rightarrow, \times}$.
+
+\section*{Esercizio 22}
+\paragraph{Testo}
+Dimostrare il teorema di validità per il tipo $\alpha \varoplus \beta$ disgiunzione.
+
+\section*{Esercizio 23}
+\paragraph{Testo}
+Inventarsi un tipo nuovo (esempio: $\alpha \times X$, $X \times X$, $List(\alpha \times X)$, $\dots$) e far vedere che funziona.
+
+\section*{Esercizio 24}
+\paragraph{Testo}
+Scrivere la funzione $eqnat : (\mathbb{N} \times \mathbb{N}) \rightarrow Boole$ che traduca la nozione di uguaglianza sui naturali.
+
+\section*{Esercizio 25}
+\paragraph{Testo}
+Implementare le seguenti funzioni
+$$\begin{cases} F(0,y) = K(y) \\ F(succ(x),y) = g(x,y,F(x,y)) \end{cases}$$
+$$\begin{cases} F(0,y) = K(y) \\ F(succ(x),y) = g(x,y,F(x,d(y))) \end{cases}$$
+e usarle per definire $Eqz(x,y)$.
+
+\section*{Esercizio 26}
+\paragraph{Testo}
+Mostrare, nel caso delle liste, che le funzioni definite con la recursion si possono definire con la tail-recursion.
+
+\section*{Esercizio 27}
+\paragraph{Testo}
+Definire le funzioni:
+\begin{itemize}
+\item $Append : List(A) \times List(A) \rightarrow List(A)$ che concatena due liste;
+\item $Reverse : List(A) \rightarrow List(A)$ che ribalta una lista;
+\item $Map : (\alpha \rightarrow \beta) \times List(A) \rightarrow List(\beta)$ che applichi una funzione $f$ ad ogni entrata della lista;
+\item $Filter : (\alpha \rightarrow Boole) \times List(\alpha) \rightarrow List(\alpha)$ che toglie dalla lista gli elementi che vanno in falso;
+\item $List(N) \rightarrow List(N)$ che prende liste di naturali e li ordina.
+\end{itemize}
+
+\section*{Esercizio 28}
+\paragraph{Testo}
+Usare un albero binario per ordinare una lista [$heapsort$]. 
+
+\section*{Esercizio 29}
+\paragraph{Testo}
+Dare la regola di eliminazione per il tipo $B(\alpha)$ per alberi binari avente le seguenti regole di introduzione:
+\begin{prooftree}
+\AxiomC{$\Gamma \vdash a : \alpha$}
+\UnaryInfC{$\Gamma \vdash leaf(a) : B(\alpha)$}
+\end{prooftree}
+
+\begin{prooftree}
+\AxiomC{$\Gamma \vdash t_1 : B(\alpha)$}
+\AxiomC{$\Gamma \vdash t_2 : B(\alpha)$}
+\BinaryInfC{$\Gamma \vdash bin(t_1,t_2) : B(\alpha)$}
+\end{prooftree}
+Dare le interpretazioni per $leaf(a)$ e $bin(t_1, t_2)$, oltre all’interpretazione massima e minima di $B(a)$. Dedurne il teorema di validità.
+
+\section*{Esercizio 30}
+\paragraph{Testo}
+Si considerino le seguenti regole di introduzione per un tipo $T(\alpha)$:
+$\vdash_\triangle : T(\alpha)$
+
+\begin{prooftree}
+\AxiomC{$\Gamma \vdash g : \alpha \times T(\alpha)$}
+\UnaryInfC{$\Gamma \vdash \square(g) : T(\alpha)$}
+\end{prooftree}
+Si definisca un’opportuna nozione di isomorfismo di tipi, e rispetto a tale nozione si dimostri che $T(\alpha)$ è isomorfo a $List(\alpha)$.
+
+\section*{Esercizio 31}
+\paragraph{Testo}
+Definire il nuovo tipo $Tree_n(\alpha)$ di alberi in cui ogni nodo ha esattamente $n$ figli.
+
+\section*{Esercizio 32}
+\paragraph{Testo}
+Definire il nuovo tipo $BT_\ast (\alpha)$ di alberi in cui ogni nodo ha al più $2$ figli.
+
+\section*{Esercizio 33}
+\paragraph{Testo}
+Dare un algoritmo che, dati due alberi binari ovvero di tipo $BT(\alpha)$ dica se sono equivalenti per vermi e che termini non appena le liste di elementi differiscano.
+
+\section*{Esercizio 34}
+\paragraph{Testo}
+Definire la funzione $d(\theta, n) : Ord(\mathbb{N}) \times \mathbb{N} \rightarrow \mathbb{N}$ che associa all’ordinale $\theta$ la lunghezza del cammino che ad ogni ordinale limite sceglie l’ennesimo percorso.
+
+\section*{Esercizio 35}
+\paragraph{Testo}
+Dimostrare che non esiste alcuna funzione suriettiva tipabile $h : \mathbb{N} \rightarrow Ord(\mathbb{N})$.
+
+\section*{Esercizio 36}
+\paragraph{Testo}
+Definire i tipi $\alpha \times T(\alpha)$ e $\alpha \varoplus T(\alpha)$.
+
+\section*{Esercizio 37}
+\paragraph{Testo}
+Mostrare in casi specifici, a scelta, che le regole di introduzione sono valide, (esempio fatto in classe: $n \in \mathbb{N} \rightarrow succ(n) \in \mathbb{N}$), e che lo sono anche le regole di eliminazione.
+
+\section*{Esercizio 38}
+\paragraph{Testo}
+Dimostrare il lemma di sostituzione in $\Lambda^{\rightarrow, \Pi, \mu}$ per induzione sulla complessità del termine, ovvero che $\llbracket \tau [x := \alpha]\rrbracket_\sigma = \llbracket \tau \rrbracket_{\sigma(x|\llbracket \alpha \rrbracket_\sigma)}$.
+\end{document}
