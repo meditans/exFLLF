@@ -141,27 +141,32 @@ Usare un albero binario per ordinare una lista [$heapsort$].
 \section*{Esercizio 29}
 \paragraph{Testo}
 Dare la regola di eliminazione per il tipo $B(\alpha)$ per alberi binari avente le seguenti regole di introduzione:
-\begin{prooftree}
-\AxiomC{$\Gamma \vdash a : \alpha$}
-\UnaryInfC{$\Gamma \vdash leaf(a) : B(\alpha)$}
-\end{prooftree}
-
-\begin{prooftree}
-\AxiomC{$\Gamma \vdash t_1 : B(\alpha)$}
-\AxiomC{$\Gamma \vdash t_2 : B(\alpha)$}
-\BinaryInfC{$\Gamma \vdash bin(t_1,t_2) : B(\alpha)$}
-\end{prooftree}
+\begin{center}
+\begin{tabular}{p{5cm} p{5cm}}
+  \AxiomC{$\Gamma \vdash a : \alpha$}
+  \UnaryInfC{$\Gamma \vdash leaf(a) : B(\alpha)$}
+  \DisplayProof
+  &
+  \AxiomC{$\Gamma \vdash t_1 : B(\alpha)$}
+  \AxiomC{$\Gamma \vdash t_2 : B(\alpha)$}
+  \BinaryInfC{$\Gamma \vdash bin(t_1,t_2) : B(\alpha)$}
+  \DisplayProof
+\end{tabular}
+\end{center}
 Dare le interpretazioni per $leaf(a)$ e $bin(t_1, t_2)$, oltre all’interpretazione massima e minima di $B(a)$. Dedurne il teorema di validità.
 
 \section*{Esercizio 30}
 \paragraph{Testo}
 Si considerino le seguenti regole di introduzione per un tipo $T(\alpha)$:
-$\vdash_\triangle : T(\alpha)$
+\begin{center}\begin{tabular}{p{3cm} p{3cm}}
+  $\vdash_\triangle : T(\alpha)$
+  &
+  \AxiomC{$\Gamma \vdash g : \alpha \times T(\alpha)$}
+  \UnaryInfC{$\Gamma \vdash \square(g) : T(\alpha)$}
+  \DisplayProof
+\end{tabular}
+\end{center}
 
-\begin{prooftree}
-\AxiomC{$\Gamma \vdash g : \alpha \times T(\alpha)$}
-\UnaryInfC{$\Gamma \vdash \square(g) : T(\alpha)$}
-\end{prooftree}
 Si definisca un’opportuna nozione di isomorfismo di tipi, e rispetto a tale nozione si dimostri che $T(\alpha)$ è isomorfo a $List(\alpha)$.
 
 \section*{Esercizio 31}
