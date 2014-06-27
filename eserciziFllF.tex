@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 
@@ -27,10 +27,84 @@ Mostrare che non si può definire la somma senza ricorsione e minimo.
 \section*{Esercizio 3}
 \paragraph{Testo}
 Si scrivano il prodotto e l’elevamento a potenza utilizzando $Z^1$, $S^1$, $P^n_i$, $C$, $R$, e si scrivano la differenza e la divisione utilizzando $Z^1$, $S^1$, $P^n_i$, $C$, $R$, $M$.
+\paragraph{Prodotto ed Elevamento a potenza}
+\begin{center}
+\begin{tabular}{p{5 cm} p{5 cm}}
+  $\begin{cases} a \times 0 = 0 \\a \times b' = a + (a \times b) \end{cases}$& $\times^2 = R^2[P^1_1,C^3[S^2,P^3_1,P^3_3]]$
+  \\
+  $\begin{cases} a \nearrow 0 = 1 \\ a \nearrow b' = a \times (a \nearrow b) \end{cases}$& $\nearrow^2 = R^2[P^1_1,C^3[S^2,P^3_1,P^3_3]]$
+\end{tabular}
+\end{center}
+
 
 \section*{Esercizio 4}
 \paragraph{Testo}
 Mostrare che la funzione di Ackermann non è ricorsiva primitiva.
+
+\paragraph{Preliminari}
+Ricordiamo la definizione della funzione di Ackermann:
+\begin{center} $ \begin{cases}
+    A(0,y) = y+1 \\
+    A(x+1,0) = A(x,1) \\
+    A(x+1,y+1) = A(x, A(x+1,y))
+\end{cases} $ \end{center}
+Procederemo a dimostrare che non si tratta di una funzione primitiva ricorsiva, trovando una proprietà che vale per tutte le funzioni primitive ricorsive ma non per la funzione di Ackermann.
+A questo scopo, diciamo che una funzione $h:\mathbb{N}^2 \rightarrow \mathbb{N}$ \emph{maggiora} $g:\mathbb{N}^k \rightarrow \mathbb{N}$ se esiste un $b\in \mathbb{N}$ tale che, per ogni $a_1, a_2, \dots, a_n \in \mathbb{N}$,
+$$g(a_1,\dots,a_k) < h(b, a_M)$$
+dove $a_M = max(a_1, \dots, a_k)$.
+Notiamo che una funzione non può maggiorare se stessa. Se così fosse, si avrebbe infatti che:
+$$\exists a, \forall x_1, x_2, h(x_1,x_2)<h(a,x_M)$$
+dove, al solito, $x_M = max(x_1,x_2)$. Allora, detto $m=max(a,x_M)$, avremmo che:
+$$h(a,m) < h(a,max(a,m)) = h(a,m)$$
+che è ovviamente assurdo.
+
+Il nostro piano è allora mostrare che le funzioni primitive ricorsive sono tutte maggiorate da $A$ (ovvero, intuitivamente, che la funzione di Ackermann cresce più velocemente di ogni funzione primitiva ricorsiva).
+Durante la dimostrazione, useremo la monotonia della funzione di Ackermann in entrambi gli argomenti, ovvero
+\begin{center} \begin{tabular}{p{4cm} p{4cm}}
+    $A(x,y)<A(x,y+1)$ & $A(x,y)<A(x+1,y)$
+\end{tabular} \end{center}
+e la seguente disuguaglianza:
+
+\begin{align*}
+  A(r,A(s,y)) &< A(r+s,A(s,y)) \\ &< A(r+s,A(r+s+1,y)) \\ &= A(r+s+1,y+1) \\ &\leq A(r+s+2,y)
+\end{align*}
+
+Cominciamo allora la dimostrazione:
+
+\paragraph{Zero, Successore, Proiezione} 
+\begin{align*}
+  Z(n) = 0 &< n+1 = A(0,n) \\
+  S(n) = n+1 &< n+2 = A(1,n) \\
+  P^k_m(n_1,\dots ,n_k) = x_m \leq x &< x+1 = A(0,x)
+\end{align*}
+
+\paragraph{Composizione}
+Supponiamo di avere $g^k_1,\dots,g^k_m$ e $h^m$, tutte maggiorate da $A$.
+Questo significa che $g^k_i(\overline{x}) < A(r_i, x)$ e $h(\overline{y}) < A(s, y)$, per opportuni valori $r_1,\dots,r_m,s$.
+Allora, se $f^k = C[h^m,g^k_1,\dots,g^k_m]$, abbiamo che, detto $g_M(\overline{x}) = max_{i=1\dots m} g_i(\overline{x})$
+$$f(\overline{x}) < A(s,g_M(\overline{x})) < A(s,A(r_M,x)) < A(s+r_M+2,x)$$
+il che dimostra che $f$ è maggiorata da $A$.
+
+\paragraph{Ricorsione}
+Supponiamo di avere $g^k,h^{k+2}$ maggiorate da $A$.
+Questo significa che $g^k(\overline{x}) < A(r, x)$ e $h(\overline{y}) < A(s, y)$, per opportuni valori $r,s$.
+Sia allora $f^{k+1} = R[g^k,h^{k+2}]$; iniziamo dimostrando che $f^{k+1}(\overline{x}, n) < A(q,n+x)$ per un valore $q$ non dipendente da $n$ né da $x$.
+Questa è una facile dimostrazione per induzione su $n$, una volta detto $q=1+max(r,s)$.
+$$f(\overline{x}, 0) = g(\overline{x}) < A(r,x) < A(q,x)$$
+\begin{align*}
+  f(\overline{x}, n+1) &= h(\overline{x}, n, f(\overline{x},n)) \\
+                       &< A(s,max(\overline{x}, n, f(\overline{x},n))) \\
+                       &< A(s, A(q,n+x)) \\
+                       & \leq A(q-1, A(q,n+x)) \\
+                       &= A(q,n+1+x)
+\end{align*}
+
+A questo punto, dati $x,y\in \mathbb{N}$, e detto $m$ il loro massimo, abbiamo che:
+$$f(x,y) < A(q,x+y) \leq A(q,2m) < A(q,2m+3) = A(q,A(2,m)) = A(q+4,z)$$
+il che dimostra che $f$ è maggiorata da $A$.
+
+\paragraph{Conclusione}
+Visto che sappiamo che l'insieme delle funzioni primitive ricorsive è il minimo insieme che contiene le funzioni iniziali, ed è chiuso per composizione e ricorsione primitiva, abbiamo che tutte le funzioni primitive ricorsive sono maggiorate da $A$. Per quanto visto all'inizio, $A$ non può allora essere una funzione primitiva ricorsiva.
 
 \section*{Esercizio 5}
 \paragraph{Testo}
@@ -142,7 +216,7 @@ Usare un albero binario per ordinare una lista [$heapsort$].
 \paragraph{Testo}
 Dare la regola di eliminazione per il tipo $B(\alpha)$ per alberi binari avente le seguenti regole di introduzione:
 \begin{center}
-\begin{tabular}{p{5cm} p{5cm}}
+\begin{tabular}{p{4cm} p{4cm}}
   \AxiomC{$\Gamma \vdash a : \alpha$}
   \UnaryInfC{$\Gamma \vdash leaf(a) : B(\alpha)$}
   \DisplayProof
