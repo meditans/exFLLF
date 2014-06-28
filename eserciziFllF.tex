@@ -4,6 +4,7 @@
 
 \usepackage{stmaryrd}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{bussproofs}
 
@@ -150,6 +151,33 @@ Una derivazione del risultato sotto le ipotesi date è quindi:
 \section*{Esercizio 7}
 \paragraph{Testo}
 Mostrare che i due modi per definire la chiusura riflessiva e transitiva sono equivalenti.
+
+\paragraph{Soluzione}
+Vogliamo dimostrare, in particolare, che è la stessa cosa definire $\twoheadrightarrow_{\beta}$ secondo gli schemi:
+\begin{center}
+  $M \twoheadrightarrow_{\beta} M$ \qquad
+  \AxiomC{$M \rightarrow_{\beta} N$}
+  \UnaryInfC{$M \twoheadrightarrow_{\beta} N$}
+  \DisplayProof \qquad
+  \AxiomC{$M \twoheadrightarrow_{\beta} N$}
+  \AxiomC{$N \twoheadrightarrow_{\beta} L$}
+  \BinaryInfC{$M \twoheadrightarrow_{\beta} L$}
+  \DisplayProof
+\end{center}
+oppure dicendo che è l'intersezione di tutte le relazioni riflessive e transitive che contengono $\rightarrow_{\beta}$.
+
+Chiamiamo $\mathcal{R}$ l'insieme delle relazioni riflessive e transitive che contengono $\rightarrow_{\beta}$.
+Per definizione, abbiamo che $\twoheadrightarrow_{\beta} \in \mathcal{R}$, e allora $\twoheadrightarrow_{\beta} \subseteq\bigcap_{R\in \mathcal{R}} R$, che è una parte dell'equivalenza.
+
+Per l'altra, ovvero che se $M \twoheadrightarrow_{\beta} N$ allora $\forall R \in \mathcal{R}, \quad M R N$,
+iniziamo notando che, se due termini sono uguali (e quindi $M \twoheadrightarrow_{\beta} M$), $MRM$ è sempre vero, perché tutte le relazioni in $\mathcal{R}$ sono riflessive.
+
+Per due termini distinti $M$ ed $N$, sappiamo che, se $M \twoheadrightarrow_{\beta} N$, allora esiste una catena di termini $L_0,\dots,L_n$ tale che $L_0=M$, $L_n=N$ e si ha $L_i \rightarrow_{\beta} L_{i+1}$ per $i=0,\dots, n-1$ (possiamo sempre dimostrarlo per induzione strutturale sulla lunghezza della prova).
+Allora, data una relazione $R$, visto che $\rightarrow_{\beta} \subseteq R$, abbiamo che $L_i R L_{i+1}$. Dimostriamo allora che $L_0RL_j$, per induzione su $j$.
+Il caso base è ovvio ($L_0RL_1$). Il caso induttivo si ottiene dall'uso dell'ipotesi induttiva e dalla transitività della relazione ($L_0RL_{j-1}$ e $L_{j-1}RL_j$ implicano $L_0RL_j$.
+Ne deduciamo quindi che $L_0RL_n$, ovvero che $MRN$, e la nostra tesi è dimostrata per la generalità di $R$. 
+
+
 
 \section*{Esercizio 8}
 \paragraph{Testo}
