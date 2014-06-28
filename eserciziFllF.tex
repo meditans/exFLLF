@@ -112,7 +112,40 @@ Produttività per $n=5$.
 
 \section*{Esercizio 6}
 \paragraph{Testo}
-Dimostrare che utilizzando la $\eta$-uguaglianza $\lambda x.M(x) = M$ , con $x \in FV(M)$, si può dedurre $M(x) = L(x) \Rightarrow M = L$ se $x \notin F V (M ) \cup F V (L)$.
+Dimostrare che utilizzando la $\eta$-uguaglianza $\lambda x.M(x) = M$ , con $x \notin FV(M)$, si può dedurre $M(x) = L(x) \Rightarrow M = L$ se $x \notin F V (M ) \cup F V (L)$.
+
+\paragraph{Soluzione}
+Gli ingredienti necessari per questa soluzione sono gli assiomi del $\lambda$-calcolo detti $\xi$-equivalenza e $\eta$-equivalenza, riportati qui di seguito:
+\begin{center}
+  \AxiomC{$b=d:term$}
+  \AxiomC{$x:var$}
+  \BinaryInfC{$(\lambda x.b) = (\lambda x.d) : term$}
+  \begin{equation}\tag{$\xi$-equivalenza} \DisplayProof \end{equation}
+\end{center}
+\begin{center}
+  \AxiomC{$b:term$}
+  \AxiomC{$x:var$}
+  \RightLabel{se $x \notin \mathbb{FV}(b)$}
+  \BinaryInfC{$\lambda x.b(x) = b : term$}
+  \begin{equation}\tag{$\eta$-equivalenza}  \DisplayProof  \end{equation}
+\end{center}
+
+Una derivazione del risultato sotto le ipotesi date è quindi:
+
+\AxiomC{$M(x)=L(x):term$}
+\AxiomC{$x:var$}
+\BinaryInfC{$\lambda x.M(x) = \lambda x.L(x) : term$}
+
+\AxiomC{$M:term$}
+\AxiomC{$x:var$}
+\BinaryInfC{$\lambda x.M(x) = M : term$}
+
+\AxiomC{$L:term$}
+\AxiomC{$x:var$}
+\BinaryInfC{$\lambda x.L(x) = L : term$}
+
+\TrinaryInfC{$M=L : term$}
+\begin{equation*} \DisplayProof \end{equation*}
 
 \section*{Esercizio 7}
 \paragraph{Testo}
