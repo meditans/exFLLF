@@ -254,7 +254,78 @@ sottolineato la redex che veniva di volta in volta eseguita.
 
 \section*{Esercizio 17}
 \paragraph{Testo}
-Dimostrare che unione arbitraria di saturi è un saturo e intersezione arbitraria di saturi è un saturo.
+Dimostrare che unione arbitraria di saturi è un saturo e intersezione
+arbitraria di saturi è un saturo.
+
+
+\paragraph{Soluzione}
+Ricordiamo innanzitutto che abbiamo definito saturi gli insiemi di
+lamba-termini fortemente normalizzabili (da ora in poi indicati con
+$\mathcal{SN}$) $S$ tali che siano verificate le due condizioni:
+
+\begin{center} 
+  \AxiomC{$x \in \mathcal{V}ar$}
+  \AxiomC{$a_1, \dots, a_n \in \mathcal{SN}$}
+  \BinaryInfC{$x \> a_1 \> \cdots \> a_n \in S$}
+  \DisplayProof
+\end{center}
+
+\begin{center} 
+  \AxiomC{$a, a_1, \dots, a_n \in \mathcal{SN}$}
+  \AxiomC{$c[x/a] \> a_1 \cdots a_n \in S$}
+  \BinaryInfC{$(\lambda x . c) \> a \> a_1 \> \cdots \> a_n \in S$}
+  \DisplayProof
+\end{center}
+
+\subparagraph{Intersezione:} innanzitutto è chiaro che
+$\bigcap_{i \in I} S_i \subseteq \mathcal{SN}$, visto che
+$\forall i \in I \> . \> S_i \subseteq \mathcal{SN}$. Vediamo quindi le condizioni:
+
+\begin{center} 
+  \AxiomC{$x \in \mathcal{V}ar$}
+  \AxiomC{$a_1, \dots, a_n \in \mathcal{SN}$}
+  \BinaryInfC{$x \> a_1 \> \cdots \> a_n \in S_i$}
+  \UnaryInfC{$\forall i \in I \> . \> x \> a_1 \> \cdots \> a_n \in S_i$}
+  \UnaryInfC{$x \> a_1 \> \cdots \> a_n \in \bigcap_{i \in I} S_i$}
+  \DisplayProof
+\end{center}
+
+\begin{center} 
+  \AxiomC{$a, a_1, \dots, a_n \in \mathcal{SN}$}
+  \AxiomC{$c[x/a] \> a_1 \cdots a_n \in \bigcap_{i \in I} S_i$}
+    \UnaryInfC{$\forall i \in I \> . \> c[x/a] \> a_1 \cdots a_n \in S_i$}
+      \UnaryInfC{$c[x/a] \> a_1 \cdots a_n \in S_i$}
+  \BinaryInfC{$(\lambda x . c) \> a \> a_1 \> \cdots \> a_n \in S_i$}
+  \UnaryInfC{$\forall i \in I \> . \> (\lambda x . c) \> a \> a_1 \> \cdots \> a_n \in S_i$}
+  \UnaryInfC{$(\lambda x . c) \> a \> a_1 \> \cdots \> a_n \in \bigcap_{i \in I} S_i$}
+  \DisplayProof
+\end{center}
+
+\subparagraph{Unione:} anche qui è chiaro che
+$\bigcup_{i \in I} S_i \in \mathcal{SN}$, e per quanto riguarda le due condizioni si ha:
+
+\begin{center} 
+  \AxiomC{$x \in \mathcal{V}ar$}
+  \AxiomC{$a_1, \dots, a_n \in \mathcal{SN}$}
+  \BinaryInfC{$x \> a_1 \> \cdots \> a_n \in S_i$}
+  \UnaryInfC{$\exists i \in I \> . \> x \> a_1 \> \cdots \> a_n \in S_i$}
+  \UnaryInfC{$x \> a_1 \> \cdots \> a_n \in \bigcup_{i \in I} S_i$}
+  \DisplayProof
+\end{center}
+
+\begin{center} 
+  \AxiomC{$a, a_1, \dots, a_n \in \mathcal{SN}$}
+  \AxiomC{$\big[c[x/a] \> a_1 \cdots a_n \in S_i\big]_1$}
+    \BinaryInfC{$(\lambda x . c) \> a \> a_1 \> \cdots \> a_n \in S_i$}
+      \UnaryInfC{$\exists i \in I \> . \>
+         (\lambda x . c) \> a \> a_1 \> \cdots \> a_n \in S_i$}
+        \UnaryInfC{$(\lambda x . c) \> a \> a_1 \> \cdots \> a_n \in \bigcup_{i \in I} S_i$}
+  \AxiomC{$c[x/a] \> a_1 \cdots a_n \in \bigcup_{i \in I} S_i$}
+    \UnaryInfC{$\exists i \in I \> . \> c[x/a] \> a_1 \cdots a_n \in S_i$}
+    \RightLabel{\small $\exists E_1$}
+  \BinaryInfC{$(\lambda x . c) \> a \> a_1 \> \cdots \> a_n \in \bigcup_{i \in I} S_i$}
+  \DisplayProof
+\end{center}
 
 \section*{Esercizio 18}
 \paragraph{Testo}
