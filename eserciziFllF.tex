@@ -8,8 +8,17 @@
 \usepackage{amsfonts}
 \usepackage{bussproofs}
 
+% Per la sottolineatura delle formule
+\usepackage{xcolor}
+
 % Questo per mettere il font Palatino
 \renewcommand*\rmdefault{ppl}
+
+% Comando per la sottolineatura delle formule
+% http://tex.stackexchange.com/questions/9466/color-underline-a-formula
+\newsavebox\MBox
+\newcommand\Cline[2][red]{{\sbox\MBox{$#2$}%
+  \rlap{\usebox\MBox}\color{#1}\rule[-1.2\dp\MBox]{\wd\MBox}{0.5pt}}}
 
 \begin{document}
 \title{Fondamenti Logici di Linguaggi Funzionali \\ \small{Anno accademico 2013/2014 \\ Esercizi del corso}}
@@ -214,6 +223,34 @@ Fornire l’algoritmo che, dati contesto e tipo, fornisca un $\lambda$-termine v
 \section*{Esercizio 16}
 \paragraph{Testo}
 Compila $(\lambda x.\lambda y. x+y)(1)(1)$ e verifica che è uguale a due.
+
+\paragraph{Soluzione}
+Ricordiamo le codifiche di Church standard:
+\begin{align*}
+  (+) &= \lambda m . \lambda n . \lambda f . \lambda x . m \> f \> (n \> f \> x)
+\\ 1  &= \lambda f . \lambda x . f\>x
+\end{align*}
+Utilizziamo la strategia di riduzione lazy (prima la redex più esterna
+e più a destra), perché ha migliori proprietà di normalizzazione,
+anche se sappiamo che il conto che ci apprestiamo a fare è in ogni
+caso convergente.
+\begin{align*}
+   &  (\lambda m . \lambda n . \lambda f . \lambda x . m \> f \> (n \> f \> x))
+         (\lambda f . \lambda x . f \> x) (\lambda f . \lambda x . f \> x)
+\\ &= \Cline[cyan]{(\lambda m . \lambda n . \lambda f . \lambda x . m \> f \> (n \> f \> x))
+         (\lambda g . \lambda y . g \> y)} (\lambda h . \lambda z . h \> z)
+\\ &= \Cline[cyan]{(\lambda n . \lambda f . \lambda x . (\lambda g . \lambda y . g \> y) \> f \> (n \> f \> x))
+         (\lambda h . \lambda z . h \> z)}
+\\ &= \lambda f . \lambda x . \Cline[cyan]{(\lambda g . \lambda y . g \> y) \> f} \>
+         ((\lambda h . \lambda z . h \> z) \> f \> x)
+\\ &= \lambda f . \lambda x . \Cline[cyan]{(\lambda y . f \> y) \> ((\lambda h . \lambda z . h \> z) \> f \> x)}
+\\ &= \lambda f . \lambda x . f \> (\Cline[cyan]{(\lambda h . \lambda z . h \> z) \> f } \> x)
+\\ &= \lambda f . \lambda x . f \> (\Cline[cyan]{(\lambda z . f \> z) \> x})
+\\ &= \lambda f . \lambda x . f \> (f \> x)
+\end{align*}
+Notiamo che l'ultimo passo è la codifica di Church del numerale $2$, e
+quindi il nostro conto è esatto. Nei passaggi precedenti ho
+sottolineato la redex che veniva di volta in volta eseguita.
 
 \section*{Esercizio 17}
 \paragraph{Testo}
